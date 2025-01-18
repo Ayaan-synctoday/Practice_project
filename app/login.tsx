@@ -7,6 +7,7 @@ const LoginPage = () => {
 
   const handleLogin = () => {
     // Handle login logic here
+    //use axios
     console.log('Login Pressed');
   };
 
