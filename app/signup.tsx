@@ -10,7 +10,8 @@ const SignUpPage = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
 
   const handleSignUp = () => {
-    // Handle sign-up logic here
+    // Handle sign-up logic here 
+    // axios
     console.log('Sign Up Pressed');
   };
 
@@ -18,7 +19,8 @@ const SignUpPage = () => {
     <View style={styles.page}>
       <Text style={styles.title}>Create new Account</Text>
       <Text style={styles.subtitle}>Already Registered? <Link href={'/login'}>Login Here</Link></Text>
-      
+      <View style={styles.circle}></View>
+      <View style={styles.circle2}></View>
     <View style={styles.container}>
       
 
@@ -52,7 +54,7 @@ const SignUpPage = () => {
       <TouchableOpacity style={styles.button} onPress={handleSignUp}>
         <Text style={styles.buttonText}>Sign Up</Text>
       </TouchableOpacity>
-
+       <Text>------------------Or Continue With------------------</Text>
       <View style={styles.socialButtons}>
         <TouchableOpacity style={styles.socialButton}>
           <Image source={require('../assets/images/google-logo.png')} style={styles.socialIcon} />
@@ -79,6 +81,28 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#8C52FF',
   },
+
+  circle2: {
+    position: 'absolute', // Place it behind the form
+    width: 300, // Size of the circle
+    height: 300,
+    borderRadius: 150, // Half of width/height for a perfect circle
+    backgroundColor: 'orange',
+    right: 100, // Move it partially behind the form (adjust as needed)
+    top: '12.9%', // Vertically align with the form
+  },
+
+
+  circle: {
+    position: 'absolute', // Place it behind the form
+    width: 300, // Size of the circle
+    height: 300,
+    borderRadius: 150, // Half of width/height for a perfect circle
+    backgroundColor: 'orange',
+    right: -100, // Move it partially behind the form (adjust as needed)
+    top: '33%', // Vertically align with the form
+  },
+
   container: {
     
     flex: 3/4,
@@ -108,7 +132,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   button: {
-    backgroundColor: '#007bff',
+    backgroundColor: 'orange',
     borderRadius: 5,
     padding: 15,
     alignItems: 'center',
