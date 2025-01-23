@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, KeyboardAvoidingView,  } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, KeyboardAvoidingView, ScrollView,} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const LoginScreen = () => {
@@ -11,10 +11,17 @@ const LoginScreen = () => {
   }
   return (
     <SafeAreaView style={styles.container}>
+      <ScrollView
+          contentContainerStyle={styles.scrollContent}
+          showsVerticalScrollIndicator={false}
+        >
       {/* Decorative circles */}
       <View style={styles.circleTopLeft} />
       <View style={styles.circleBottomRight} />
       
+
+      
+
       <View style={styles.topContainer}>
         <Text style={styles.title}>Login</Text>
         <Text style={styles.subtitle}>Sign in to continue</Text>
@@ -48,7 +55,7 @@ const LoginScreen = () => {
         </View>
 
         <View style={styles.signup}>
-          <Text style={styles.signupText}>Signup</Text>
+          <Text style={styles.signupText}>Signup!</Text>
         </View>
 
         <View style={styles.signup}>
@@ -64,11 +71,14 @@ const LoginScreen = () => {
           </TouchableOpacity>
         </View>
       </View>
+      
 
       <View style={styles.bottomContainer}>
         <Text style={styles.poweredBy}>Powered by ALinfo</Text>
       </View>
+      </ScrollView>
     </SafeAreaView>
+
   );
 };
 
@@ -112,6 +122,12 @@ const styles = StyleSheet.create({
     color: 'white',
     marginBottom: 10,
   },
+  scrollContent: {
+    flexGrow: 1,
+    justifyContent: 'center',
+    paddingBottom: 40,
+  },
+
   formContainer: {
     width: '80%', // Increased width
     backgroundColor: 'white',
@@ -188,5 +204,6 @@ const styles = StyleSheet.create({
 });
 
 export default LoginScreen;
+
 
 
