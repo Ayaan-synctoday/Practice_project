@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, KeyboardAvoidingView,  } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
@@ -7,10 +8,9 @@ const LoginScreen = () => {
 
   const handleLogin = () => {
     console.log('Login Pressed');
-  };
-
+  }
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       {/* Decorative circles */}
       <View style={styles.circleTopLeft} />
       <View style={styles.circleBottomRight} />
@@ -48,7 +48,7 @@ const LoginScreen = () => {
         </View>
 
         <View style={styles.signup}>
-          <Text style={styles.signupText}>Signup!</Text>
+          <Text style={styles.signupText}>Signup</Text>
         </View>
 
         <View style={styles.signup}>
@@ -68,7 +68,7 @@ const LoginScreen = () => {
       <View style={styles.bottomContainer}>
         <Text style={styles.poweredBy}>Powered by ALinfo</Text>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -80,37 +80,31 @@ const styles = StyleSheet.create({
   },
   circleTopLeft: {
     position: 'absolute',
-    top: 170, // Adjusted to position perfectly behind the top-left of the form
-    left: -80, // Tweaked for better alignment
-    width: 300, // Reduced size to fit snugly behind the top-left corner
-    height: 300, // Same as width for a perfect circle
-    borderRadius: 150, // Half of width/height for a perfect circle
-    backgroundColor: 'red', // Matches the image
-    opacity: 0.5, // Semi-transparent for the design effect
+    
+    top: 160, // Adjusted to position perfectly behind the top-left of the form
+    left: -50, // Tweaked for better alignment
+    width: 200, // Reduced size to fit snugly behind the top-left corner
+    height: 200, // Same as width for a perfect circle
+    borderRadius: 100, // Half of width/height for a perfect circle
+    backgroundColor: '#ffa401', // Matches the image
     zIndex: 0, // Behind the form container
   },
   circleBottomRight: {
     position: 'absolute',
-    bottom: 250, // Positioned at the bottom-right, mirroring the top-left position
-    right: -80, // Tweaked to align symmetrically with the bottom-right corner
-    width: 300, // Same size as the top-left circle
-    height: 300, // Same as width for a perfect circle
-    borderRadius: 150, // Half of width/height for a perfect circle
-    backgroundColor: 'red', // Matches the color of the top-left circle
-    opacity: 0.5, // Same transparency for consistent design
+    bottom: 50, // Positioned at the bottom-right, mirroring the top-left position
+    right: -50, // Tweaked to align symmetrically with the bottom-right corner
+    width: 200, // Same size as the top-left circle
+    height: 200, // Same as width for a perfect circle
+    borderRadius: 100, // Half of width/height for a perfect circle
+    backgroundColor: '#ffa401', // Matches the color of the top-left circle
     zIndex: 0, // Ensures it stays behind the form container
   },
-  
-  
-  
-  
-  
   topContainer: {
     alignItems: 'center',
     marginTop: 50,
   },
   title: {
-    fontSize: 30,
+    fontSize: 60,
     fontWeight: 'bold',
     color: 'white',
   },
@@ -121,8 +115,11 @@ const styles = StyleSheet.create({
   formContainer: {
     width: '80%', // Increased width
     backgroundColor: 'white',
+    height:'64%',
     padding: 30, // Increased padding
-    borderRadius: 15,
+    borderRadius: 40,
+    paddingTop:'20%',
+    paddingBottom:'10%',
     alignSelf: 'center',
     marginTop: 40, // Added more margin
     zIndex: 1, // Ensure it's above the circles
@@ -134,9 +131,10 @@ const styles = StyleSheet.create({
   input: {
     borderWidth: 1,
     borderColor: '#ccc',
-    borderRadius: 5,
+    borderRadius: 15,
     padding: 10,
     marginBottom: 15,
+    backgroundColor:'silver'
   },
   button: {
     backgroundColor: '#ffa401',
@@ -180,7 +178,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     backgroundColor: 'white',
-    height: 50,
+    height: 40,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -190,3 +188,5 @@ const styles = StyleSheet.create({
 });
 
 export default LoginScreen;
+
+
