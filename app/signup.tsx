@@ -1,153 +1,192 @@
-import { Link } from 'expo-router';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Alert } from 'react-native';
-import handleSignup from './handleSignup'
-import axios from "axios";
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, KeyboardAvoidingView, ScrollView } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-
-const SignUpPage = () => {
-  const [username, setName] = useState('');
+const SignUpScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [phone, setPhone] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [name, setName] = useState('');
 
-//
 
-  const onSignup = () => {
-    if (!username || !email || !phone || !password) {
-      Alert.alert('Error', 'All fields are required.');
-      return;
-    }
-
-    handleSignup(username, email, phone, password);
+  const handleSignUp = () => {
+    console.log('Sign Up Pressed');
   };
 
   return (
-    <View style= {exstyles.page}>
-      <Text style={exstyles.title}>Create new Account</Text>
-      <Text style={exstyles.subtitle}>Already Registered? <Link href={'/login'}>Login Here</Link></Text>
-      <View style={exstyles.circle}></View>
-      <View style={exstyles.circle2}></View>
-    <View style={exstyles.container}>
-      
+    <SafeAreaView style={styles.container}>
+      <ScrollView
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={false}
+      >
+        {/* Decorative circles */}
+        <View style={styles.circleTopLeft} />
+        <View style={styles.circleBottomRight} />
 
-      <TextInput
-        style={exstyles.input}
-        placeholder="NAME"
-        value={username}
+        <View style={styles.topContainer}>
+          <Text style={styles.title}>Create New</Text>
+          <Text style={styles.title}>Account</Text>
+          <Text style={styles.subtitle}>Already Registered?Login Here</Text>
+        </View>
+
+        <View style={styles.formContainer}>
+        <Text style={styles.inputLabel}>NAME</Text>
+        <TextInput
+        style={styles.input}
+        placeholder="Enter Name"
+        value={name}
         onChangeText={(text) => setName(text)}
-      />
-      <TextInput
-        style={exstyles.input}
-        placeholder="EMAIL"
-        value={email}
-        onChangeText={(text) => setEmail(text)}
-      />
-      <TextInput
-        style={exstyles.input}
-        placeholder="PASSWORD"
-        secureTextEntry
-        value={password}
-        onChangeText={(text) => setPassword(text)}
-      />
-      <TextInput
-        style={exstyles.input}
-        placeholder="PHONE NUMBER"
-        keyboardType="phone-pad"
-        value={phone}
-        onChangeText={(text) => setPhone(text)}
-      />
+        />
 
-      <TouchableOpacity style={exstyles.button} onPress={onSignup}>
-        <Text style={exstyles.buttonText}>Sign Up</Text>
-      </TouchableOpacity>
-       <Text>------------------Or Continue With------------------</Text>
-      <View style={exstyles.socialButtons}>
-        <TouchableOpacity style={exstyles.socialButton}>
-          <Image source={require('../assets/images/google-logo.png')} style={exstyles.socialIcon} />
-        </TouchableOpacity>
-        <TouchableOpacity style={exstyles.socialButton}>
-          <Image source={require('../assets/images/facebook-logo.png')} style={exstyles.socialIcon} />
-        </TouchableOpacity>
-      </View>
+          <Text style={styles.inputLabel}>EMAIL</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter Email"
+            value={email}
+            onChangeText={(text) => setEmail(text)}
+          />
+          <Text style={styles.inputLabel}>PASSWORD</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter Password"
+            secureTextEntry
+            value={password}
+            onChangeText={(text) => setPassword(text)}
+          />
+          <Text style={styles.inputLabel}>PHONE NUMBER</Text>
+<TextInput
+  style={styles.input}
+  placeholder="Enter Phone Number"
+  keyboardType="phone-pad"
+  value={phoneNumber}
+  onChangeText={(text) => setPhoneNumber(text)}
+/>
 
-      
-      
-    </View>
-    <Text style={exstyles.poweredBy}>Powered by Alinfo</Text>
-    </View>
-    
+
+          <TouchableOpacity style={styles.button} onPress={handleSignUp}>
+            <Text style={styles.buttonText}>Sign Up</Text>
+          </TouchableOpacity>
+
+          <View style={styles.signup}>
+  <Text style={styles.signupText}>------Or Register With-----</Text>
+</View>
+          <View style={styles.socialButtons}>
+            <TouchableOpacity style={styles.socialButton}>
+              <Image source={require('../assets/images/google-logo.png')} style={styles.socialIcon} />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.socialButton}>
+              <Image source={require('../assets/images/facebook-logo.png')} style={styles.socialIcon} />
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        <View style={styles.bottomContainer}>
+
+          <Text style={styles.poweredBy}>Powered by ALinfoo</Text>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
-const exstyles = StyleSheet.create({
-  page: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#8C52FF",
-  },
-
-  circle2: {
-    position: "absolute", // Place it behind the form
-    width: 300, // Size of the circle
-    height: 300,
-    borderRadius: 150, // Half of width/height for a perfect circle
-    backgroundColor: "orange",
-    right: 100, // Move it partially behind the form (adjust as needed)
-    top: "12.9%", // Vertically align with the form
-  },
-
-  circle: {
-    position: "absolute", // Place it behind the form
-    width: 300, // Size of the circle
-    height: 300,
-    borderRadius: 150, // Half of width/height for a perfect circle
-    backgroundColor: "orange",
-    right: -100, // Move it partially behind the form (adjust as needed)
-    top: "33%", // Vertically align with the form
-  },
-
+const styles = StyleSheet.create({
   container: {
-    flex: 3 / 4,
-    backgroundColor: "#FFFFFF",
-    paddingTop: 40,
-    paddingBottom: 80,
-    padding: 15,
-    borderRadius: 20,
+    flex: 1,
+    backgroundColor: '#8c52ff',
+    position: 'relative',
   },
+  circleTopLeft: {
+    position: 'absolute',
+    top: 160,
+    left: -50,
+    width: 200,
+    height: 200,
+    borderRadius: 100,
+    backgroundColor: '#ffa401',
+    zIndex: 0,
+  },
+  circleBottomRight: {
+    position: 'absolute',
+    bottom: 50,
+    right: -50,
+    width: 200,
+    height: 200,
+    borderRadius: 100,
+    backgroundColor: '#ffa401',
+    zIndex: 0,
+  },
+  topContainer: {
+    alignItems: 'center',
+    marginTop: -10,
 
+  },
   title: {
-    color: "#FFFFFF",
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 10,
+
+    fontSize: 35,
+    fontWeight: 'bold',
+    color: 'white',
+    padding:-5,
+    
   },
   subtitle: {
-    color: "#FFFFFF",
-    marginBottom: 20,
+    
+    color: 'white',
+    marginBottom: 10,
+  },
+  scrollContent: {
+    flexGrow: 1,
+    justifyContent: 'center',
+    paddingBottom: 40,
+  },
+  formContainer: {
+    width: '80%',
+    backgroundColor: 'white',
+    height: 'auto',
+    padding: 30,
+    borderRadius: 40,
+    alignSelf: 'center',
+    marginTop: 0,
+    zIndex: 1,
+  },
+  inputLabel: {
+    marginBottom: 5,
+    fontWeight: 'bold',
   },
   input: {
-    width: 250,
     borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 5,
+    borderColor: '#ccc',
+    borderRadius: 15,
     padding: 10,
     marginBottom: 15,
+    backgroundColor: 'silver',
   },
   button: {
-    backgroundColor: "orange",
+    backgroundColor: '#ffa401',
     borderRadius: 5,
     padding: 15,
-    alignItems: "center",
+    alignItems: 'center',
   },
   buttonText: {
-    color: "#fff",
-    fontWeight: "bold",
+    color: '#fff',
+    fontWeight: 'bold',
+  },
+  alreadyAccount: {
+    marginTop: 10,
+    alignItems: 'center',
+  },
+  alreadyAccountText: {
+    color: '#007bff',
+  },
+  signup: {
+    marginTop: 10,
+    alignItems: 'center',
+  },
+  signupText: {
+    color: '#007bff',
   },
   socialButtons: {
-    flexDirection: "row",
-    justifyContent: "center",
+    flexDirection: 'row',
+    justifyContent: 'center',
     marginTop: 20,
   },
   socialButton: {
@@ -157,12 +196,19 @@ const exstyles = StyleSheet.create({
     width: 30,
     height: 30,
   },
+  bottomContainer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: 'white',
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   poweredBy: {
-    backgroundColor: "#FFFFFF",
-
-    textAlign: "center",
-    marginTop: "auto",
+    textAlign: 'center',
   },
 });
 
-export default SignUpPage;
+export default SignUpScreen;
