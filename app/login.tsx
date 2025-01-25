@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, KeyboardAvoidingView, ScrollView,} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Link } from 'expo-router';  // link
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
@@ -9,6 +10,7 @@ const LoginScreen = () => {
   const handleLogin = () => {
     console.log('Login Pressed');
   }
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView
@@ -50,12 +52,16 @@ const LoginScreen = () => {
 
         <View style={styles.forgotPassword}>
           <TouchableOpacity>
+          <Link href="/OtpScreen"> 
             <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
+            </Link>
           </TouchableOpacity>
         </View>
 
         <View style={styles.signup}>
+        <Link href="/signup">
           <Text style={styles.signupText}>Signup!</Text>
+          </Link>
         </View>
 
         <View style={styles.signup}>

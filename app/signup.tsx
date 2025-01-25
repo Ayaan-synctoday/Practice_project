@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, KeyboardAvoidingView, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Link } from 'expo-router';
 
 const SignUpScreen = () => {
   const [email, setEmail] = useState('');
@@ -11,6 +12,9 @@ const SignUpScreen = () => {
 
   const handleSignUp = () => {
     console.log('Sign Up Pressed');
+  };
+  const loginpage = () => {
+    console.log('Directed to login page');
   };
 
   return (
@@ -26,7 +30,11 @@ const SignUpScreen = () => {
         <View style={styles.topContainer}>
           <Text style={styles.title}>Create New</Text>
           <Text style={styles.title}>Account</Text>
-          <Text style={styles.subtitle}>Already Registered?Login Here</Text>
+          <Text style={styles.subtitle}>Already Registered? 
+          <Link href="/login" onPress={loginpage}> 
+            Login Here 
+          </Link>
+        </Text>
         </View>
 
         <View style={styles.formContainer}>
