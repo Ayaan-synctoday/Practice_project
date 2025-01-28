@@ -3,12 +3,19 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, KeyboardAvo
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Link } from 'expo-router';  // link
 
+
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     console.log('Login Pressed');
+    const url = "http://10.0.2.2:8000/users/login";
+    let result = await fetch(url,{method:"POST", headers:{
+      "Content-Type":"application/json"
+    },
+    body:JSON.stringify({email,password})
+  })
   }
 
   return (

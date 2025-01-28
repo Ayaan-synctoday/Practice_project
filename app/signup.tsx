@@ -6,12 +6,19 @@ import { Link } from 'expo-router';
 const SignUpScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [username, setusername] = useState('');
 
 
-  const handleSignUp = () => {
+  const handleSignUp = async () => {
     console.log('Sign Up Pressed');
+    const url = "http://10.0.2.2:8000/users/signup";
+    let result = await fetch(url,{method:"POST", headers:{
+      "Content-Type":"application/json"
+    },
+    body:JSON.stringify({username,email,phone,password})
+  })
+
   };
   const loginpage = () => {
     console.log('Directed to login page');
@@ -42,8 +49,8 @@ const SignUpScreen = () => {
         <TextInput
         style={styles.input}
         placeholder="Enter Name"
-        value={name}
-        onChangeText={(text) => setName(text)}
+        value={username}
+        onChangeText={(text) => setusername(text)}
         />
 
           <Text style={styles.inputLabel}>EMAIL</Text>
@@ -66,8 +73,8 @@ const SignUpScreen = () => {
   style={styles.input}
   placeholder="Enter Phone Number"
   keyboardType="phone-pad"
-  value={phoneNumber}
-  onChangeText={(text) => setPhoneNumber(text)}
+  value={phone}
+  onChangeText={(text) => setPhone(text)}
 />
 
 
