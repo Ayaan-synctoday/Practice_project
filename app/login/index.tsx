@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, KeyboardAvoidingView, ScrollView,} from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, KeyboardAvoidingView, ScrollView, Platform} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Link } from 'expo-router';  // link
+import { useNavigation } from '@react-navigation/native';
 
 
 const LoginScreen = () => {
+  const navigation = useNavigation(); // Get navigation instance
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -20,6 +21,7 @@ const LoginScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={{ flex: 1 }}>
       <ScrollView
           contentContainerStyle={styles.scrollContent}
           showsVerticalScrollIndicator={false}
@@ -58,17 +60,15 @@ const LoginScreen = () => {
         </TouchableOpacity>
 
         <View style={styles.forgotPassword}>
-          <TouchableOpacity>
-          <Link href="/OtpScreen"> 
-            <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
-            </Link>
-          </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('OtpScreen')}>
+                <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
+              </TouchableOpacity>
         </View>
 
         <View style={styles.signup}>
-        <Link href="/signup">
-          <Text style={styles.signupText}>Signup!</Text>
-          </Link>
+        <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
+                <Text style={styles.signupText}>Signup!</Text>
+              </TouchableOpacity>
         </View>
 
         <View style={styles.signup}>
@@ -77,10 +77,10 @@ const LoginScreen = () => {
 
         <View style={styles.socialButtons}>
           <TouchableOpacity style={styles.socialButton}>
-            <Image source={require('../assets/images/google-logo.png')} style={styles.socialIcon} />
+            <Image source={require('../../assets/images/google-logo.png')} style={styles.socialIcon} />
           </TouchableOpacity>
           <TouchableOpacity style={styles.socialButton}>
-            <Image source={require('../assets/images/facebook-logo.png')} style={styles.socialIcon} />
+            <Image source={require('../../assets/images/facebook-logo.png')} style={styles.socialIcon} />
           </TouchableOpacity>
         </View>
       </View>
@@ -90,6 +90,7 @@ const LoginScreen = () => {
         <Text style={styles.poweredBy}>Powered by ALinfo</Text>
       </View>
       </ScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaView>
 
   );
@@ -104,8 +105,8 @@ const styles = StyleSheet.create({
   circleTopLeft: {
     position: 'absolute',
     
-    top: 160, // Adjusted to position perfectly behind the top-left of the form
-    left: -50, // Tweaked for better alignment
+    top: Platform.OS === 'web' ? '10%' : 160,  // Adjusted top position for web responsiveness
+    left: Platform.OS === 'web' ? '5%' : -50,  // Adjusted left position for web
     width: 200, // Reduced size to fit snugly behind the top-left corner
     height: 200, // Same as width for a perfect circle
     borderRadius: 100, // Half of width/height for a perfect circle
@@ -114,8 +115,8 @@ const styles = StyleSheet.create({
   },
   circleBottomRight: {
     position: 'absolute',
-    bottom: 50, // Positioned at the bottom-right, mirroring the top-left position
-    right: -50, // Tweaked to align symmetrically with the bottom-right corner
+    bottom: Platform.OS === 'web' ? '10%' : 50,  // Adjusted bottom position for web
+    right: Platform.OS === 'web' ? '5%' : -50,   // Adjusted right position for web
     width: 200, // Same size as the top-left circle
     height: 200, // Same as width for a perfect circle
     borderRadius: 100, // Half of width/height for a perfect circle
@@ -142,7 +143,8 @@ const styles = StyleSheet.create({
   },
 
   formContainer: {
-    width: '80%', // Increased width
+    width: '90%', // Increased width
+    maxWidth: 400,  // Added maxWidth to prevent stretching on larger screens (Web fix)
     backgroundColor: 'white',
     height:'64%',
     padding: 30, // Increased padding

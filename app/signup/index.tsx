@@ -1,35 +1,37 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, KeyboardAvoidingView, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Link } from 'expo-router';
+import { useNavigation } from '@react-navigation/native'; // Import useNavigation
+import { RootStackParamList } from '../_layout';  // Path to your type definition file
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
 
 const SignUpScreen = () => {
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>(); // Use navigation hook
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [phone, setPhone] = useState('');
   const [username, setusername] = useState('');
 
-
   const handleSignUp = async () => {
     console.log('Sign Up Pressed');
     const url = "http://10.0.2.2:8000/users/signup";
-    let result = await fetch(url,{method:"POST", headers:{
-      "Content-Type":"application/json"
-    },
-    body:JSON.stringify({username,email,phone,password})
-  })
-
+    let result = await fetch(url,{
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ username, email, phone, password })
+    });
   };
-  const loginpage = () => {
-    console.log('Directed to login page');
+
+  const loginPage = () => {
+    navigation.navigate('Login'); // Navigates to Login page when called
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView
-        contentContainerStyle={styles.scrollContent}
-        showsVerticalScrollIndicator={false}
-      >
+      <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
         {/* Decorative circles */}
         <View style={styles.circleTopLeft} />
         <View style={styles.circleBottomRight} />
@@ -37,21 +39,22 @@ const SignUpScreen = () => {
         <View style={styles.topContainer}>
           <Text style={styles.title}>Create New</Text>
           <Text style={styles.title}>Account</Text>
-          <Text style={styles.subtitle}>Already Registered? 
-          <Link href="/login" onPress={loginpage}> 
-            Login Here 
-          </Link>
-        </Text>
+          <Text style={styles.subtitle}>
+            Already Registered?</Text>
+            <TouchableOpacity onPress={loginPage}>
+              <Text style={styles.linkText}>Login Here</Text> {/* Use TouchableOpacity for navigation */}
+            </TouchableOpacity>
+          
         </View>
 
         <View style={styles.formContainer}>
-        <Text style={styles.inputLabel}>NAME</Text>
-        <TextInput
-        style={styles.input}
-        placeholder="Enter Name"
-        value={username}
-        onChangeText={(text) => setusername(text)}
-        />
+          <Text style={styles.inputLabel}>NAME</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter Name"
+            value={username}
+            onChangeText={(text) => setusername(text)}
+          />
 
           <Text style={styles.inputLabel}>EMAIL</Text>
           <TextInput
@@ -69,34 +72,33 @@ const SignUpScreen = () => {
             onChangeText={(text) => setPassword(text)}
           />
           <Text style={styles.inputLabel}>PHONE NUMBER</Text>
-<TextInput
-  style={styles.input}
-  placeholder="Enter Phone Number"
-  keyboardType="phone-pad"
-  value={phone}
-  onChangeText={(text) => setPhone(text)}
-/>
-
+          <TextInput
+            style={styles.input}
+            placeholder="Enter Phone Number"
+            keyboardType="phone-pad"
+            value={phone}
+            onChangeText={(text) => setPhone(text)}
+          />
 
           <TouchableOpacity style={styles.button} onPress={handleSignUp}>
             <Text style={styles.buttonText}>Sign Up</Text>
           </TouchableOpacity>
 
           <View style={styles.signup}>
-  <Text style={styles.signupText}>------Or Register With-----</Text>
-</View>
+            <Text style={styles.signupText}>------Or Register With-----</Text>
+          </View>
+
           <View style={styles.socialButtons}>
             <TouchableOpacity style={styles.socialButton}>
-              <Image source={require('../assets/images/google-logo.png')} style={styles.socialIcon} />
+              <Image source={require('../../assets/images/google-logo.png')} style={styles.socialIcon} />
             </TouchableOpacity>
             <TouchableOpacity style={styles.socialButton}>
-              <Image source={require('../assets/images/facebook-logo.png')} style={styles.socialIcon} />
+              <Image source={require('../../assets/images/facebook-logo.png')} style={styles.socialIcon} />
             </TouchableOpacity>
           </View>
         </View>
 
         <View style={styles.bottomContainer}>
-
           <Text style={styles.poweredBy}>Powered by ALinfoo</Text>
         </View>
       </ScrollView>
@@ -133,18 +135,14 @@ const styles = StyleSheet.create({
   topContainer: {
     alignItems: 'center',
     marginTop: -10,
-
   },
   title: {
-
     fontSize: 35,
     fontWeight: 'bold',
     color: 'white',
-    padding:-5,
-    
+    padding: -5,
   },
   subtitle: {
-    
     color: 'white',
     marginBottom: 10,
   },
@@ -223,6 +221,10 @@ const styles = StyleSheet.create({
   },
   poweredBy: {
     textAlign: 'center',
+  },
+  linkText: {
+    color: '#FFFFFF',  // Add styling for the "Login Here" link
+    textDecorationLine: 'underline',
   },
 });
 

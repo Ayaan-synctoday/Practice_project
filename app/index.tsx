@@ -1,34 +1,31 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image, ImageBackground, Linking,  } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { Link } from 'expo-router';
-import { linkTo } from 'expo-router/build/global-state/routing';
+import { RootStackParamList } from './_layout';  // Path to your type definition file
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 
-
-export default function App() {
-  
+const IndexScreen =()=> {
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>(); // Initialize navigation
   
   
   return (
     <View style={styles.container}>
-      {/* Welcome Statement */}
+      
       <ImageBackground style= {{width:400, height:300}}
       source={require('../assets/images/logo.png')}> </ImageBackground>
       <Text style={styles.title}>Wrench Pro</Text>
       <Text style={styles.subtitle}>Get Started</Text>
 
-      {/* Buttons */}
+      
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button}>
-        <Link href={'/login'}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Login')}>
+        
           <Text style={styles.buttonText}>Login</Text>
-          </Link>
+      
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
-          <Link href={'/signup'}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('SignUp')}>
          <Text style={styles.buttonText}>Signup</Text>
-         </Link>
         </TouchableOpacity>
       </View>
     </View>
@@ -75,3 +72,5 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
 });
+
+export default IndexScreen;
