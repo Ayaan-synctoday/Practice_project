@@ -1,13 +1,26 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, KeyboardAvoidingView, ScrollView, Platform} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+<<<<<<< HEAD:app/login/index.tsx
 import { useNavigation } from '@react-navigation/native';
+=======
+import { Link } from 'expo-router';
+import ForgotPasswordScreen from './OtpScreen'
+>>>>>>> 761961b107637d5211dc6d954041a5232eee34d1:app/login.tsx
 
+import { useNavigation } from '@react-navigation/native'; 
 
 const LoginScreen = () => {
+<<<<<<< HEAD:app/login/index.tsx
   const navigation = useNavigation(); // Get navigation instance
+=======
+  const navigation = useNavigation();
+
+>>>>>>> 761961b107637d5211dc6d954041a5232eee34d1:app/login.tsx
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  
+
 
   const handleLogin = async () => {
     console.log('Login Pressed');
@@ -60,9 +73,17 @@ const LoginScreen = () => {
         </TouchableOpacity>
 
         <View style={styles.forgotPassword}>
+<<<<<<< HEAD:app/login/index.tsx
         <TouchableOpacity onPress={() => navigation.navigate('OtpScreen')}>
                 <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
               </TouchableOpacity>
+=======
+          <TouchableOpacity >
+          <Link href="/OtpScreen">
+            <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
+            </Link>
+          </TouchableOpacity>
+>>>>>>> 761961b107637d5211dc6d954041a5232eee34d1:app/login.tsx
         </View>
 
         <View style={styles.signup}>

@@ -8,6 +8,7 @@ import SignUpScreen from './signup';
 import LoginScreen from './login';
 import OtpScreen from './OtpScreen';
 
+<<<<<<< HEAD
 // Define types for navigation screensconsole.log('Navigation Container Loaded');
 console.log('Stack Navigator Loaded');
 console.log('Screens Loaded: Home, SignUp, Login, OtpScreen');
@@ -35,4 +36,13 @@ export default function App() {
       
       
   );
+=======
+export default function RootLayout() {
+  return <Stack >
+    <Stack.Screen name="index"/>
+    <Stack.Screen name="SignUp"/>
+    <Stack.Screen name="Login"/>
+    <Stack.Screen name="OtpScreen"/>
+  </Stack>;
+>>>>>>> 761961b107637d5211dc6d954041a5232eee34d1
 }

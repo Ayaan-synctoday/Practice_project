@@ -28,6 +28,7 @@ const SignUpScreen = () => {
   const loginPage = () => {
     navigation.navigate('Login'); // Navigates to Login page when called
   };
+    
 
   return (
     <SafeAreaView style={styles.container}>
@@ -39,12 +40,22 @@ const SignUpScreen = () => {
         <View style={styles.topContainer}>
           <Text style={styles.title}>Create New</Text>
           <Text style={styles.title}>Account</Text>
+<<<<<<< HEAD:app/signup/index.tsx
           <Text style={styles.subtitle}>
             Already Registered?</Text>
             <TouchableOpacity onPress={loginPage}>
               <Text style={styles.linkText}>Login Here</Text> {/* Use TouchableOpacity for navigation */}
             </TouchableOpacity>
           
+=======
+          <Text style={styles.subtitle}>Already Registered? 
+          <Link href="/login" onPress={() => {
+              console.log('Directed to login page');
+            }}> 
+            Login Here 
+          </Link>
+        </Text>
+>>>>>>> 761961b107637d5211dc6d954041a5232eee34d1:app/signup.tsx
         </View>
 
         <View style={styles.formContainer}>
